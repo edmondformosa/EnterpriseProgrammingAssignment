@@ -11,7 +11,10 @@ namespace EnterpriseProgrammingAssignment.Models
     public class Categories
     {
         [Key]
-        public Guid Category_Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Category_Id { get; set; }
         public string CategoryName { get; set; }
+
+        public virtual ICollection<ItemTypes> ItemType { get; set; }
     }
 }

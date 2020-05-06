@@ -1,0 +1,58 @@
+﻿@model EnterpriseProgrammingAssignment.Models.ItemDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ItemDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemType_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemType_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quality_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quality_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Item_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -11,7 +11,10 @@ namespace EnterpriseProgrammingAssignment.Models
     public class Quality
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Quality_Id { get; set; }
         public string QualityType { get; set; }
+
+        public virtual ICollection<ItemDetails> itemDetails { get; set; }
     }
 }

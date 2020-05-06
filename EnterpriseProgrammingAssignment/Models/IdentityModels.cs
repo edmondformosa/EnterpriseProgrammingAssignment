@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,7 @@ namespace EnterpriseProgrammingAssignment.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public virtual ICollection<ItemDetails> ItemDetails { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -25,9 +27,15 @@ namespace EnterpriseProgrammingAssignment.Models
         {
         }
 
+        public DbSet<Categories> categories { get; set; }
+        public DbSet<Quality> qualities { get; set; }
+        public DbSet<ItemTypes> itemTypes { get; set; }
+        public DbSet<ItemDetails> itemDetails { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+        
     }
 }

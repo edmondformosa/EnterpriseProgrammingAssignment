@@ -11,9 +11,17 @@ namespace EnterpriseProgrammingAssignment.Models
     public class ItemTypes
     {
         [Key]
-        public Guid ItemType_Id { get; set; }
-        public Guid Category_Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long ItemType_Id { get; set; }
+        public long Category_Id { get; set; }
+        [Required]
         public string ItemName { get; set; }
+        [Required]
         public string ImageUrl { get; set; }
+
+        [ForeignKey("Category_Id")]
+        public virtual Categories category { get; set; }
+
+        public virtual ICollection<ItemDetails> ItemDetails { get; set; }
     }
 }

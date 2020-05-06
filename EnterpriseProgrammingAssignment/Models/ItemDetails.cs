@@ -10,13 +10,25 @@ namespace EnterpriseProgrammingAssignment.Models
     [Table("AspNetItemDetails", Schema = "dbo")]
     public class ItemDetails
     {
-        [Key]
-        public Guid Item_Id { get; set; }
-        public Guid ItemType_Id { get; set; }
-        public int Quality_Id { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
-        public Guid User_Id { get; set; }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Item_Id { get; set; }
+        public long ItemType_Id { get; set; }
+        public int Quality_Id { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity cannot be negative number!")]
+        public int Quantity { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Price cannot be negative number!")]
+        public decimal Price { get; set; }
+        public string User_Id { get; set; }
+
+        [ForeignKey("ItemType_Id")]
+        public virtual ItemTypes itemType { get; set; }
+        [ForeignKey("Quality_Id")]
+        public virtual Quality quality { get; set; }
+        [ForeignKey("User_Id")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
