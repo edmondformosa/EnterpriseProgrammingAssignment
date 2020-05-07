@@ -19,7 +19,7 @@ namespace EnterpriseProgrammingAssignment.Migrations
 
         protected override void Seed(EnterpriseProgrammingAssignment.Models.ApplicationDbContext context)
         {
-            /*List<Categories> category = new List<Categories>();
+            List<Categories> category = new List<Categories>();
             category.Add(new Categories { CategoryName = "Computer and Office" });
             category.Add(new Categories { CategoryName = "Vehicles" });
             category.Add(new Categories { CategoryName = "Electronics" });
@@ -103,11 +103,11 @@ namespace EnterpriseProgrammingAssignment.Migrations
             itemTypes.Add((new ItemTypes { Category_Id = 5, ItemName = "Sofa ", ImageUrl = "https://www.dropbox.com/s/9b7vrbcip8ej3q3/sofa597a7d00bcf04b078972ed7ea1afab3c.jpg?dl=1" }));
             itemTypes.Add((new ItemTypes { Category_Id = 5, ItemName = "Stool ", ImageUrl = "https://www.dropbox.com/s/h9ylsqzkk211r52/stool9e759648b6764188aca3716f1f1603b9.webp?dl=1" }));
             context.itemTypes.AddRange(itemTypes);
-            */
+            
             List<ItemDetails> itemDetails = new List<ItemDetails>();
 
-           // itemDetails.Add((new ItemDetails { ItemType_Id = 1, Quality_Id = 1, Quantity = 4, Price = 1.10M, User_Id = "0dd482c4-7086-417e-92c4-c1c4288e6555"}));
-            //itemDetails.Add((new ItemDetails { ItemType_Id = 2, Quality_Id = 2, Quantity = 6, Price = 3.30M, User_Id = "0dd482c4-7086-417e-92c4-c1c4288e6555" }));
+            itemDetails.Add((new ItemDetails { ItemType_Id = 1, Quality_Id = 1, Quantity = 4, Price = 1.10M, User_Id = "0dd482c4-7086-417e-92c4-c1c4288e6555"}));
+            itemDetails.Add((new ItemDetails { ItemType_Id = 2, Quality_Id = 2, Quantity = 6, Price = 3.30M, User_Id = "0dd482c4-7086-417e-92c4-c1c4288e6555" }));
             itemDetails.Add((new ItemDetails { ItemType_Id = 3, Quality_Id = 3, Quantity = 8, Price = 2.00M, User_Id = "157621ee-c87c-4749-b997-3c3b12e9b718" }));
             itemDetails.Add((new ItemDetails { ItemType_Id = 4, Quality_Id = 4, Quantity = 4, Price = 1.50M, User_Id = "5ee63f90-8f05-4d88-8ee9-b0674efd7b27" }));
             itemDetails.Add((new ItemDetails { ItemType_Id = 5, Quality_Id = 1, Quantity = 3, Price = 1.00M, User_Id = "157621ee-c87c-4749-b997-3c3b12e9b718" }));

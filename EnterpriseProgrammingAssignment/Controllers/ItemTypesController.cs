@@ -13,6 +13,7 @@ using PagedList;
 
 namespace EnterpriseProgrammingAssignment.Controllers
 {
+    [HandleError]
     public class ItemTypesController : Controller
     {
         static readonly string ApplicationName = "EdmondEnterpriseAssignment";
@@ -93,7 +94,7 @@ namespace EnterpriseProgrammingAssignment.Controllers
             {
 
                 string accessToken = "qJwkZLnkrnAAAAAAAAAAM5cYlNmKG_S7yEWJalqNYZKgMm_nQ9OlXPK50EkuuWI2";
-                
+
                 using (DropboxClient client = new DropboxClient(accessToken, new DropboxClientConfig(ApplicationName)))
                 {
                     HttpPostedFileBase file = Request.Files["file"];
@@ -103,26 +104,35 @@ namespace EnterpriseProgrammingAssignment.Controllers
                     string[] fileNameAndExtensionSplit = fileNameAndExtension.Split('.');
                     string originalFileName = fileNameAndExtensionSplit[0];
                     string originalExtension = fileNameAndExtensionSplit[1];
+                    switch (originalExtension)
+                    {
+                        case "png":
+                        case "jpeg":
+                        case "jpg":
 
+                        string fileName = @"/Images/" + originalFileName + Guid.NewGuid().ToString().Replace("-", "") + "." + originalExtension;
 
-                    string fileName = @"/Images/" + originalFileName + Guid.NewGuid().ToString().Replace("-", "") + "." + originalExtension;
+                        var updated = client.Files.UploadAsync(
+                                        fileName,
+                                        mode: WriteMode.Overwrite.Overwrite.Instance,
+                                        body: file.InputStream).Result;
 
-                    var updated = client.Files.UploadAsync(
-                                    fileName,
-                                    mode: WriteMode.Overwrite.Overwrite.Instance,
-                                    body: file.InputStream).Result;
+                        var result = client.Sharing.CreateSharedLinkWithSettingsAsync(fileName).Result;
+                        string[] newUrl = result.Url.Split('?');
+                        string newestUrl = newUrl[0] + "?dl=1";
 
-                    var result = client.Sharing.CreateSharedLinkWithSettingsAsync(fileName).Result;
-                    string[] newUrl = result.Url.Split('?');
-                    string newestUrl = newUrl[0] + "?dl=1";
+                        itemTypes.ImageUrl = newestUrl;
+                        db.itemTypes.Add(itemTypes);
+                        db.SaveChanges();
+                            break;
 
-                    itemTypes.ImageUrl = newestUrl;
-                    db.itemTypes.Add(itemTypes);
-                    db.SaveChanges();
+                        default:
+                            ViewBag.Error = "Wrong image format!";
+                            return RedirectToAction("Index");
+                            
+                    }
                     return RedirectToAction("Index");
                 }
-
-                
             }
             ViewBag.Category_Id = new SelectList(db.categories, "Category_Id", "CategoryName", itemTypes.Category_Id);
             return View(itemTypes);

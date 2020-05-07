@@ -11,6 +11,7 @@ using PagedList;
 
 namespace EnterpriseProgrammingAssignment.Controllers
 {
+    [HandleError]
     public class ItemDetailsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
